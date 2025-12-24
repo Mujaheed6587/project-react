@@ -1,0 +1,45 @@
+.navbar {
+  width: 100%;
+  background: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.nav-links li {
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+.nav-links li.active {
+  border-bottom: 2px solid #1a73e8; /* blue underline */
+  color: #1a73e8;
+}
+
+.nav-right .profile-pic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}

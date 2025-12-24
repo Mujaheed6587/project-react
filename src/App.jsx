@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import {Routes,Route, Navigate } from "react-router";
+import Sidebar from "./components/shared/Sidebar.jsx";
+import Navbar from "./components/shared/Navbar.jsx";
+import Overview from "./pages/dashboard/Overview.jsx";
+import Hero from "./pages/Heropage.jsx";
+import ProtectedRoute from "./components/home/protectRoute.jsx";
+import Login from "./pages/Login.jsx"
+     function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
 
-export default App
+      {/* Public Route */}
+      <Route path="/login" element={<Login />} />
+
+      {/* Protected layout */}
+      <Route
+        path="/Overview"
+        element={
+          <ProtectedRoute>
+            <div style={{ display: "flex", minHeight: "100vh" }}>
+              <Sidebar />
+              <div style={{ flex: 1 }}>
+                <Navbar />
+                <Overview />
+              </div>
+            </div>
+            <Routes>
+              <Route path="/" element={<h2>Analytics Page</h2>} />
+              <Route path="/events" element={<h2>Events Page</h2>} />
+              <Route path="/emails" element={<h2>Emails Page</h2>} />
+              <Route path="/settings" element={<h2>Settings Page</h2>} />
+              <Route path="/sponsors" element={<h2>Sponsors Page</h2>} />
+            </Routes>
+            <Routes>
+      <Route
+        path="/Hero" element={<Hero />} />
+      </Routes>
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="overview" />} />
+        <Route path="overview" element={<Overview />} />
+      </Route>
+    </Routes>
+   
+  );
+}
+  <Routes>
+            <Route path="/" element={<h2>Analytics Page</h2>} />
+            <Route path="/events" element={<h2>Events Page</h2>} />
+            <Route path="/emails" element={<h2>Emails Page</h2>} />
+            <Route path="/settings" element={<h2>Settings Page</h2>} />
+            <Route path="/sponsors" element={<h2>Sponsors Page</h2>} />
+    </Routes>
+export default App;
+         
+          {/* <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes> */}
+ 
